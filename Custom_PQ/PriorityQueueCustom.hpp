@@ -98,14 +98,20 @@ public:
 		// --
 	};
 
-	template <class... Args> void emplace(Args&&... args) {
+	//template<class... Args> inline void pass(Args&&...) {};
+	template <class... Args> 
+	void emplace(Args&&... args) {
 		// --
 		std::cout << "before emplace_back: ";
 		for (auto i : container_item) std::cout << i << ' ';
 		std::cout << '\n';
 		// --
 
-		container_item.emplace_back(args);
+		//std::cout << std::forward<Args>(args)... << std::endl;
+
+
+		//container_item.emplace_back(std::forward<Args>(args)...);
+		//pass(container_item.emplace_back(args)...);
 		std::push_heap(container_item.begin(), container_item.end(), compare_item);
 
 		// --
